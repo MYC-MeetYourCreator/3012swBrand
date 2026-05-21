@@ -8,12 +8,85 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    @font-face {
+      font-family: 'Texas';
+      src: url('texas.ttf') format('truetype');
+    }
+
     body {
       background-color: #fff;
       color: #000;
       text-align: center;
     }
 
+    /* BURGER MENU */
+    .burger {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .burger span {
+      display: block;
+      width: 30px;
+      height: 3px;
+      background: #000;
+      transition: all 0.3s ease;
+    }
+
+    .burger.open span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .burger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger.open span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* NAV MENU */
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 300px;
+      height: 100vh;
+      background: #fff;
+      border-right: 2px solid #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .nav-menu.open {
+      left: 0;
+    }
+
+    .nav-menu a {
+      font-family: 'Texas', sans-serif;
+      font-size: 36px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 3px;
+      transition: opacity 0.2s;
+    }
+
+    .nav-menu a:hover {
+      opacity: 0.5;
+    }
+
+    /* HERO */
     .hero {
       height: 100vh;
       display: flex;
@@ -24,11 +97,9 @@
     }
 
     .welcome {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Texas', sans-serif;
       font-size: 72px;
-      font-weight: 900;
       letter-spacing: 6px;
-      text-transform: uppercase;
     }
 
     .logo-img {
@@ -37,7 +108,7 @@
     }
 
     .shop-btn {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Texas', sans-serif;
       font-size: 22px;
       letter-spacing: 4px;
       text-transform: uppercase;
@@ -55,10 +126,37 @@
   </style>
 </head>
 <body>
+
+  <!-- BURGER -->
+  <div class="burger" id="burger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- NAV MENU -->
+  <nav class="nav-menu" id="navMenu">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="communicate.html">COMMUNICATE</a>
+  </nav>
+
+  <!-- HERO -->
   <section class="hero">
     <div class="welcome">Welcome to</div>
     <img src="logo.png" alt="3012" class="logo-img">
     <a href="#" class="shop-btn">Shop Here</a>
   </section>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navMenu = document.getElementById('navMenu');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      navMenu.classList.toggle('open');
+    });
+  </script>
+
 </body>
 </html>
