@@ -19,6 +19,19 @@
       text-align: center;
     }
 
+    /* DATETIME */
+    .datetime {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Texas', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #000;
+      z-index: 998;
+    }
+
     /* BURGER MENU */
     .burger {
       position: fixed;
@@ -105,6 +118,12 @@
     .logo-img {
       width: 400px;
       max-width: 90%;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .shop-btn {
@@ -126,6 +145,9 @@
   </style>
 </head>
 <body>
+
+  <!-- DATETIME -->
+  <div class="datetime" id="datetime"></div>
 
   <!-- BURGER -->
   <div class="burger" id="burger">
@@ -156,6 +178,21 @@
       burger.classList.toggle('open');
       navMenu.classList.toggle('open');
     });
+
+    function updateDateTime() {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('datetime').textContent =
+        `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
   </script>
 
 </body>
