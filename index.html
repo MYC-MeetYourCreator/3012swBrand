@@ -142,9 +142,106 @@
       background: #000;
       color: #fff;
     }
+
+    /* POPUP */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-overlay.hidden {
+      display: none;
+    }
+
+    .popup {
+      background: #fff;
+      width: 340px;
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Texas', sans-serif;
+      color: #000;
+    }
+
+    .popup-logo {
+      width: 160px;
+      margin-bottom: 20px;
+    }
+
+    .popup-title {
+      font-family: 'Texas', sans-serif;
+      font-size: 48px;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      margin-bottom: 15px;
+    }
+
+    .popup-subtitle {
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .popup input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #000;
+      font-size: 14px;
+      margin-bottom: 15px;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
+
+    .popup-btn {
+      width: 100%;
+      padding: 14px;
+      background: #000;
+      color: #fff;
+      border: none;
+      font-family: 'Texas', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .popup-btn:hover {
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
+
+  <!-- POPUP -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <button class="popup-close" id="popupClose">✕</button>
+      <img src="logo.png" alt="3012" class="popup-logo">
+      <div class="popup-title">10% OFF</div>
+      <div class="popup-subtitle">Be part of the process. Join Now.</div>
+      <input type="email" placeholder="Enter your email">
+      <button class="popup-btn">GET MY 10%</button>
+    </div>
+  </div>
 
   <!-- DATETIME -->
   <div class="datetime" id="datetime"></div>
@@ -171,6 +268,7 @@
   </section>
 
   <script>
+    // BURGER
     const burger = document.getElementById('burger');
     const navMenu = document.getElementById('navMenu');
 
@@ -179,6 +277,7 @@
       navMenu.classList.toggle('open');
     });
 
+    // DATETIME
     function updateDateTime() {
       const now = new Date();
       const day = String(now.getDate()).padStart(2, '0');
@@ -193,6 +292,15 @@
 
     updateDateTime();
     setInterval(updateDateTime, 1000);
+
+    // POPUP — εμφανίζεται μετά από 3 δευτερόλεπτα
+    setTimeout(() => {
+      document.getElementById('popupOverlay').classList.remove('hidden');
+    }, 3000);
+
+    document.getElementById('popupClose').addEventListener('click', () => {
+      document.getElementById('popupOverlay').classList.add('hidden');
+    });
   </script>
 
 </body>
